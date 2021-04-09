@@ -7,31 +7,31 @@
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
-
-    var symbolMap = {
-        '1': '१',
-        '2': '२',
-        '3': '३',
-        '4': '४',
-        '5': '५',
-        '6': '६',
-        '7': '७',
-        '8': '८',
-        '9': '९',
-        '0': '०'
-    },
-    numberMap = {
-        '१': '1',
-        '२': '2',
-        '३': '3',
-        '४': '4',
-        '५': '5',
-        '६': '6',
-        '७': '7',
-        '८': '8',
-        '९': '9',
-        '०': '0'
-    };
+    // EDIT: don't use symbols
+    //var symbolMap = {
+    //    '1': '१',
+    //    '2': '२',
+    //    '3': '३',
+    //    '4': '४',
+    //    '5': '५',
+    //    '6': '६',
+    //    '7': '७',
+    //    '8': '८',
+    //    '9': '९',
+    //    '0': '०'
+    //},
+    //numberMap = {
+    //    '१': '1',
+    //    '२': '2',
+    //    '३': '3',
+    //    '४': '4',
+    //    '५': '5',
+    //    '६': '6',
+    //    '७': '7',
+    //    '८': '8',
+    //    '९': '9',
+    //    '०': '0'
+    //};
 
     var hi = moment.defineLocale('hi', {
         months : 'जनवरी_फ़रवरी_मार्च_अप्रैल_मई_जून_जुलाई_अगस्त_सितम्बर_अक्टूबर_नवम्बर_दिसम्बर'.split('_'),
@@ -72,46 +72,49 @@
             y : 'एक वर्ष',
             yy : '%d वर्ष'
         },
-        preparse: function (string) {
-            return string.replace(/[१२३४५६७८९०]/g, function (match) {
-                return numberMap[match];
-            });
-        },
-        postformat: function (string) {
-            return string.replace(/\d/g, function (match) {
-                return symbolMap[match];
-            });
-        },
+        // EDIT: don't use symbols
+        //preparse: function (string) {
+        //    return string.replace(/[१२३४५६७८९०]/g, function (match) {
+        //        return numberMap[match];
+        //    });
+        //},
+        //postformat: function (string) {
+        //    return string.replace(/\d/g, function (match) {
+        //        return symbolMap[match];
+        //    });
+        //},
+        
+        // EDIT: don't use hindi meridiems
         // Hindi notation for meridiems are quite fuzzy in practice. While there exists
         // a rigid notion of a 'Pahar' it is not used as rigidly in modern Hindi.
-        meridiemParse: /रात|सुबह|दोपहर|शाम/,
-        meridiemHour : function (hour, meridiem) {
-            if (hour === 12) {
-                hour = 0;
-            }
-            if (meridiem === 'रात') {
-                return hour < 4 ? hour : hour + 12;
-            } else if (meridiem === 'सुबह') {
-                return hour;
-            } else if (meridiem === 'दोपहर') {
-                return hour >= 10 ? hour : hour + 12;
-            } else if (meridiem === 'शाम') {
-                return hour + 12;
-            }
-        },
-        meridiem : function (hour, minute, isLower) {
-            if (hour < 4) {
-                return 'रात';
-            } else if (hour < 10) {
-                return 'सुबह';
-            } else if (hour < 17) {
-                return 'दोपहर';
-            } else if (hour < 20) {
-                return 'शाम';
-            } else {
-                return 'रात';
-            }
-        },
+        //meridiemParse: /रात|सुबह|दोपहर|शाम/,
+        //meridiemHour : function (hour, meridiem) {
+        //    if (hour === 12) {
+        //        hour = 0;
+        //    }
+        //    if (meridiem === 'रात') {
+        //        return hour < 4 ? hour : hour + 12;
+        //    } else if (meridiem === 'सुबह') {
+        //        return hour;
+        //    } else if (meridiem === 'दोपहर') {
+        //        return hour >= 10 ? hour : hour + 12;
+        //    } else if (meridiem === 'शाम') {
+        //        return hour + 12;
+        //    }
+        //},
+        //meridiem : function (hour, minute, isLower) {
+        //    if (hour < 4) {
+        //        return 'रात';
+        //    } else if (hour < 10) {
+        //        return 'सुबह';
+        //    } else if (hour < 17) {
+        //        return 'दोपहर';
+        //    } else if (hour < 20) {
+        //        return 'शाम';
+        //    } else {
+        //        return 'रात';
+        //    }
+        //},
         week : {
             dow : 0, // Sunday is the first day of the week.
             doy : 6  // The week that contains Jan 6th is the first week of the year.
